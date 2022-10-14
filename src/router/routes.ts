@@ -47,6 +47,15 @@ const routes = [
       keepAlive: true,
     },
   },
+  {
+    name: 'register',
+    path: '/register',
+    component: () => import('/@/views/login/cnps/login-register.vue'),
+    meta: {
+      title: '',
+      keepAlive: true,
+    },
+  },
 ];
 
 export default routes;

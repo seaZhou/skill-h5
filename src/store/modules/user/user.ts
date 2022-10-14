@@ -1,9 +1,9 @@
-import { useCookies } from '@vueuse/integrations/useCookies';
 import { defineStore } from 'pinia';
 import { ILoginState } from './types';
 import { accountLoginRequest } from '/@/service/login/login';
 import localCache from '/@/utils/cache';
 import router from '/@/router';
+import { Toast } from '@nutui/nutui';
 
 interface StoreUser {
   token: string;
@@ -32,10 +32,15 @@ export const useUserStore = defineStore({
       console.log(account, 'account');
       const loginResult = await accountLoginRequest(account);
       console.log(loginResult, 'res');
-      this.setInfo(loginResult.data.sysUser);
-      this.setToken(loginResult.token.access_token);
-      localCache.setCache('token', loginResult.token.access_token);
-      router.push({ path: '/home' });
+      if (loginResult.code === 200) {
+        this.setInfo(loginResult.data.sysUser);
+        this.setToken(loginResult.token.access_token);
+        localCache.setCache('token', loginResult.token.access_token);
+        router.push({ path: '/home' });
+        Toast.success(loginResult.msg);
+      } else {
+        Toast.fail(loginResult.msg);
+      }
     },
   },
   persist: {
@@ -44,30 +49,3 @@ export const useUserStore = defineStore({
     paths: ['token'],
   },
 });
-// export const useUserStore = defineStore('app-user', () => {
-//   const Token = ref(token);
-//   const info = ref<Record<any, any>>({});
-//   const setInfo = (info: any) => {
-//     info.value = info ? info : '';
-//   };
-//   const getUserInfo = () => {
-//     return info || {};
-//   };
-//   const login = () => {
-//     return new Promise((resolve) => {
-//       const { data } = loginPassword();
-//       watch(data, () => {
-//         setInfo(data.value);
-//         // useCookies().set(VITE_TOKEN_KEY as string, data.value.token);
-//         resolve(data.value);
-//       });
-//     });
-//   };
-//   return {
-//     Token,
-//     info,
-//     setInfo,
-//     login,
-//     getUserInfo,
-//   };
-// });

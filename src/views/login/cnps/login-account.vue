@@ -1,26 +1,19 @@
 <template>
   <div class="login-account">
-    <div class="header">
-      <div class="header-l">
-        <h2>注册</h2>
-        <div>欢迎来到文鼎教育学习平台</div>
-      </div>
-    </div>
     <nut-form ref="ruleForm" :model-value="formData">
       <nut-form-item required prop="username" :rules="[{ required: true, message: '请输入用户名' }]">
         <input v-model="formData.username" class="nut-input-text" placeholder="请输入用户名" type="text" />
       </nut-form-item>
-      <nut-form-item required prop="password" :rules="[{ required: true, message: '请输入验证码' }]">
-        <input v-model="formData.password" class="nut-input-text" placeholder="请输入验证码" type="password" />
+      <nut-form-item required prop="password" :rules="[{ required: true, message: '请填写联系电话' }]">
+        <input v-model="formData.password" class="nut-input-text" placeholder="请输入密码" type="password" />
       </nut-form-item>
-      <nut-button>发送验证码</nut-button>
-      <nut-countdown :end-time="end" />
       <div class="info">
         <nut-icon size="10px" name="check-normal" color="#D9D9D9" />
         我已阅读并同意 <span>《用户协议》</span>、 <span>隐私政策</span>、 <span>儿童守护协议</span>和
         <span>儿童个人 信息保护规则</span>
       </div>
       <nut-button block type="default" @click="submit"> 登录 </nut-button>
+      <div class="forget-password">忘记密码？</div>
     </nut-form>
   </div>
 </template>
@@ -32,7 +25,6 @@
     username: '',
     password: '',
   });
-  const end = ref(60);
   const ruleForm = ref<any>(null);
   const submit = () => {
     ruleForm.value?.validate().then(({ valid, errors }: any) => {

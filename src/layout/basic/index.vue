@@ -61,7 +61,7 @@
 
   .main-page {
     box-sizing: border-box;
-    padding: 40px;
+    padding: 20px;
     height: calc(100vh - 200px);
     overflow-y: scroll;
     overflow-x: hidden;

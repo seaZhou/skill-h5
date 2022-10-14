@@ -1,87 +1,93 @@
 <template>
-  <header class="header">
-    <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png" /><span> {{ $t('title') }}</span>
-  </header>
-  <div class="intro-header">
-    <div>{{ $t('introduction') }}</div>
-    <a href="https://github.com/sunniejs/vue-h5-template.git">
-      <nut-icon name="github" />
-    </a>
+  <div class="header">
+    <nut-swiper :init-page="state.page" loop :pagination-visible="true" pagination-color="#426543" auto-play="3000">
+      <nut-swiper-item v-for="item in state.list" :key="item">
+        <img :src="item" alt="" style="height: 130px" />
+      </nut-swiper-item>
+    </nut-swiper>
   </div>
-  <nut-cell-group :title="$t('home.support')" class="supportList">
-    <nut-cell v-for="(item, index) in cellList" :key="index" :title="item" icon="Check" />
-  </nut-cell-group>
-  <nut-cell-group :title="$t('home.cssMultiLanguage')" class="supportList">
-    <nut-cell>
-      <div :class="['btn-confirm', locale]"></div>
-    </nut-cell>
-  </nut-cell-group>
-  <div class="btn-wrap">
-    <nut-button shape="square" size="small" type="default" @click="changeLang('zh-cn')">
-      {{ $t('language.zh') }}
-    </nut-button>
-    <nut-button shape="square" size="small" type="default" @click="changeLang('en-us')">
-      {{ $t('language.en') }}
-    </nut-button>
-  </div>
-  {{ getUserInfo }}
+  <!-- <div class="adamantine-compound"> -->
+  <nut-grid :border="false">
+    <nut-grid-item v-for="(item, index) in icons" :key="index">
+      <img :src="item.src" alt="" />
+      <span>{{ item.title }}</span>
+    </nut-grid-item>
+  </nut-grid>
+  <!-- </div> -->
+  <var-cell>
+    <template #default> 我的课程 </template>
+    <template #extra><var-icon name="chevron-right" /></template>
+  </var-cell>
+  <nut-card
+    style="margin-bottom: 16px"
+    ripple
+    :title="item.lessonName"
+    :img-url="item.lessonPicUrl"
+    layout="row"
+    v-for="item in getLessonList"
+    :key="item.lessonId"
+  >
+    <template #prolist>
+      <div>
+        <nut-rate spacing="16" icon-size="12" active-color="#FFC800" v-model="rate" />
+        <nut-button plain color="#438AFE" type="info" size="mini">立即报名</nut-button>
+      </div>
+    </template>
+    <template #price><nut-price :price="1886" size="normal" :need-symbol="false" :thousands="true" /></template>
+    <template #origin>{{}}人已报名</template>
+  </nut-card>
 </template>
 
 <script lang="ts" setup name="HomePage">
   import { computed } from 'vue';
-  import { useUserStore } from '../../store/modules/user/user';
-  import { setLang } from '/@/i18n';
-  import { useI18n } from 'vue-i18n';
-  const { locale } = useI18n();
-
-  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
-  const userStore = useUserStore();
-  const getUserInfo = computed(() => {
-    console.log(userStore.token, '232');
-    const { name = '' } = userStore.getUserInfo || {};
-    return name;
+  import { useLessonStore } from '../../store/modules/lesson/lesson';
+  import icon1 from '../../assets/images/首页-课程类型icon.png';
+  import icon4 from '../../assets/images/首页-学习报告icon.png';
+  import icon3 from '../../assets/images/首页-资料icon.png';
+  import icon2 from '../../assets/images/首页-题库icon.png';
+  const lessonStore = useLessonStore();
+  const state = reactive({
+    page: 2,
+    list: [
+      'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+      'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
+      'https://storage.360buyimg.com/jdc-article/fristfabu.jpg',
+    ],
   });
-
-  const changeLang = (type) => {
-    setLang(type);
+  const icons = ref([
+    { src: icon1, title: '课程类型' },
+    { src: icon2, title: '班级' },
+    { src: icon3, title: '资料' },
+    { src: icon4, title: '学习报告' },
+  ]);
+  const commonParmas = {
+    pageSize: 6,
+    pageNum: 1,
+    orderByColumn: 'create_time',
+    isAsc: 'desc',
   };
+  onMounted(() => {
+    lessonStore.lessonList(commonParmas);
+    console.log(lessonStore.rows, 'userStore');
+  });
+  const getLessonList = computed(() => {
+    console.log(lessonStore.getLessonList, 'userStore.getLessonList');
+    const list = lessonStore.getLessonList || [];
+    return list;
+  });
+  const rate = ref(4);
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    font-size: 40px;
-    img {
-      width: 90px;
-      height: 90px;
+    .nut-swiper-item {
+      img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
     }
   }
-
-  .intro-header {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .supportList {
-    margin: 0 16px;
-
-    .nut-cell-group__title {
-      margin-top: 30px;
-    }
-    .nut-icon {
-      color: green;
-    }
-  }
-
-  .btn-wrap {
-    margin: 20px;
-  }
-  .btn-confirm {
-    @include main-lang-bg(302px, 82px, '/@/assets/button', 'confirm.png');
+  .var-card__container {
+    padding: 0 15px 0 10px;
   }
 </style>

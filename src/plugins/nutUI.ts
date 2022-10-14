@@ -34,6 +34,8 @@ import {
   Grid,
   GridItem,
   Divider,
+  Swiper,
+  SwiperItem,
 } from '@nutui/nutui';
 
 export const nutUiComponents = [
@@ -70,4 +72,6 @@ export const nutUiComponents = [
   Grid,
   GridItem,
   Divider,
+  Swiper,
+  SwiperItem,
 ];

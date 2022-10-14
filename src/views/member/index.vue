@@ -10,16 +10,38 @@
       <p class="info"> 个人其他信息，后续补充.... </p>
     </div>
   </div>
-  <nut-grid>
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-    <nut-grid-item icon="dongdong" text="文字" />
-  </nut-grid>
+  <nut-cell-group>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-shu">我的学习</span>
+      </template>
+    </nut-cell>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-zhuanye">我的专业</span>
+      </template>
+    </nut-cell>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-dingdan">我的订单</span>
+      </template>
+    </nut-cell>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-a-weibiaoti-1_huaban1fuben41">毕业管理</span>
+      </template>
+    </nut-cell>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-kaoshianpai">考次管理</span>
+      </template>
+    </nut-cell>
+    <nut-cell is-link>
+      <template #title>
+        <span class="iconfont icon-kefu">客服/帮助</span>
+      </template>
+    </nut-cell>
+  </nut-cell-group>
 </template>
 
 <script lang="ts" setup name="MemberPage">

@@ -1,39 +1,73 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 3703206 */
-  src: url('iconfont.woff2?t=1665642206395') format('woff2'),
-       url('iconfont.woff?t=1665642206395') format('woff'),
-       url('iconfont.ttf?t=1665642206395') format('truetype');
+  font-family: 'iconfont'; /* Project id 3703206 */
+  src: url('iconfont.woff2?t=1665735873399') format('woff2'), url('iconfont.woff?t=1665735873399') format('woff'),
+    url('iconfont.ttf?t=1665735873399') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
+  font-family: 'iconfont' !important;
+  font-size: 22px !important;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shu:before {
+  content: '\e608';
+}
+
+.icon-dingdan:before {
+  content: '\e897';
+}
+
+.icon-kefu:before {
+  content: '\e625';
+}
+
+.icon-banjixinxi:before {
+  content: '\e65f';
+}
+
+.icon-banjixinxi1:before {
+  content: '\e662';
+}
+
+.icon-banji:before {
+  content: '\e675';
+}
+
+.icon-zhuanye:before {
+  content: '\e642';
+}
+
+.icon-kaoshianpai:before {
+  content: '\e7be';
+}
+
+.icon-a-weibiaoti-1_huaban1fuben41:before {
+  content: '\e609';
+}
+
 .icon-weixindenglu:before {
-  content: "\e638";
+  content: '\e638';
 }
 
 .icon-yiliaohangyedeICON-:before {
-  content: "\e61f";
+  content: '\e61f';
 }
 
 .icon-shouji:before {
-  content: "\e602";
+  content: '\e602';
 }
 
 .icon-ABSxitong-weixintubiao:before {
-  content: "\e64f";
+  content: '\e64f';
 }
 
 .icon-weixin:before {
-  content: "\e607";
+  content: '\e607';
 }
 
 .icon-shoujizhuti_01dianhua:before {
-  content: "\e604";
+  content: '\e604';
 }
-

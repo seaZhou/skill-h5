@@ -12,6 +12,9 @@ declare module '@vue/runtime-core' {
     TitleBar: typeof import('./../src/components/TitleBar/index.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VarButton: typeof import('@varlet/ui')['_ButtonComponent']
+    VarCard: typeof import('@varlet/ui')['_CardComponent']
+    VarCell: typeof import('@varlet/ui')['_CellComponent']
+    VarIcon: typeof import('@varlet/ui')['_IconComponent']
     VarSpace: typeof import('@varlet/ui')['_SpaceComponent']
   }
 }
