@@ -1,10 +1,6 @@
 <template>
   <nut-navbar :left-show="false" :title="$t($route.meta.title)" />
   <div class="main-page">
-    <!-- <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" :key="$route.path" />
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" :key="$route.path" /> -->
     <RouterView v-slot="{ Component }" v-if="$route.meta.keepAlive">
       <keep-alive>
         <component :is="Component" :key="$route.path" />
@@ -12,8 +8,15 @@
     </RouterView>
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" />
   </div>
-  <nut-tabbar unactive-color="#CCCCCC" active-color="#438AFE" @tab-switch="tabSwitch" bottom v-model:visible="activeTab">
-    <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
+  <nut-tabbar
+    safe-area-inset-bottom
+    unactive-color="#CCCCCC"
+    active-color="#438AFE"
+    @tab-switch="tabSwitch"
+    bottom
+    v-model:visible="activeTab"
+  >
+    <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" class="iconfont" :class="item.icon" />
   </nut-tabbar>
 </template>
 
@@ -21,10 +24,10 @@
   import { useRouter } from 'vue-router';
 
   const tabItem = [
-    { key: 'home', icon: 'home' },
-    { key: 'myCourse', icon: 'horizontal' },
-    { key: 'news', icon: 'location' },
-    { key: 'member', icon: 'my' },
+    { key: 'home', icon: 'icon-shouye' },
+    { key: 'myCourse', icon: 'icon-kecheng' },
+    { key: 'news', icon: 'icon-xiaoxizhongxin' },
+    { key: 'member', icon: 'icon-wode' },
   ];
 
   const router = useRouter();
@@ -57,6 +60,14 @@
 <style scoped lang="scss">
   .nut-navbar {
     margin-bottom: 0;
+    background: linear-gradient(155deg, #77befe 0%, #438afe 100%);
+    ::v-deep .nut-navbar__title .title {
+      color: #fff;
+    }
+  }
+  .nut-tabbar-bottom .nut-tabbar-item {
+    display: flex;
+    flex-direction: column;
   }
 
   .main-page {
@@ -65,5 +76,6 @@
     height: calc(100vh - 200px);
     overflow-y: scroll;
     overflow-x: hidden;
+    // background: #f8f8f8;
   }
 </style>

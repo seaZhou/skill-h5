@@ -1,3 +1,37 @@
 .abc {
   width: 10px;
 }
+.fl {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-primary {
+  background: #e2edff;
+  // border-radius: 5px;
+  color: #438afe;
+  padding: 10px 20px;
+}
+
+.p-5 {
+  padding-right: 10px;
+}
+
+.color-9 {
+  color: #999;
+}
+.color-3 {
+  color: #333;
+}
+.nut-cell {
+  .nut-card__right {
+    padding: 0 0 0 20px;
+    .nut-card__right__title {
+      color: #333;
+      font-weight: bold;
+    }
+  }
+}
+
+.p-c-10 {
+  padding: 10px 0;
+}

@@ -1,40 +1,60 @@
 import { defineStore } from 'pinia';
-import { LessonListRequest } from '/@/service/lesson/index';
+import { LessonListRequest, LiveListRequest } from '/@/service/lesson/index';
 import localCache from '/@/utils/cache';
 import router from '/@/router';
 import { Toast } from '@nutui/nutui';
 
 interface StoreList {
-  rows: Record<any, any>;
+  listLesson: Record<any, any>;
+  listLive: Record<any, any>;
   total: number;
+  liveTotal: number;
 }
 
 export const useLessonStore = defineStore({
   id: 'app-user',
   state: (): StoreList => ({
     total: 0,
-    rows: {},
+    listLesson: {},
+    listLive: {},
+    liveTotal: 0,
   }),
   getters: {
     getLessonList(): any {
-      return this.rows || {};
+      return this.listLesson || {};
+    },
+    getLiveList(): any {
+      return this.listLive || {};
     },
   },
   actions: {
-    setRows(rows: any) {
-      console.log(rows, 'rows')
-      this.rows = rows ? rows : '';
+    setlist(list: any) {
+      this.listLesson = list ? list : '';
+    },
+    setlistLive(list: any) {
+      this.listLive = list ? list : '';
     },
     setTotal(total: number) {
       this.total = total ? total : 0;
     },
+    setTotalLive(total: number) {
+      this.liveTotal = total ? total : 0;
+    },
     async lessonList(params) {
-      console.log(params, 'params');
       const listResult = await LessonListRequest(params);
-      console.log(listResult, 'listResult');
       if (listResult.code === 200) {
-        this.setRows(listResult.rows);
+        this.setlist(listResult.rows);
         this.setTotal(listResult.total);
+        Toast.success(listResult.msg);
+      } else {
+        Toast.fail(listResult.msg);
+      }
+    },
+    async liveList(params) {
+      const listResult = await LiveListRequest(params);
+      if (listResult.code === 200) {
+        this.setlistLive(listResult.rows);
+        this.setTotalLive(listResult.total);
         Toast.success(listResult.msg);
       } else {
         Toast.fail(listResult.msg);

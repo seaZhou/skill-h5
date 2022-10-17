@@ -1,5 +1,9 @@
 <template>
-  <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :vip-price="state.vipPrice" :shop-name="state.shopName" />
+  <nut-searchbar v-model="searchValue">
+    <template #leftin>
+      <nut-icon size="14" name="search2" />
+    </template>
+  </nut-searchbar>
 </template>
 
 <script lang="ts" setup name="ListPage">

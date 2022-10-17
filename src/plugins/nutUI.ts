@@ -36,6 +36,8 @@ import {
   Divider,
   Swiper,
   SwiperItem,
+  Tabs,
+  TabPane,
 } from '@nutui/nutui';
 
 export const nutUiComponents = [
@@ -74,4 +76,6 @@ export const nutUiComponents = [
   Divider,
   Swiper,
   SwiperItem,
+  Tabs,
+  TabPane,
 ];
